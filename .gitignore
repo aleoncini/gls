@@ -10,6 +10,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Mac OS X files
+.DS_Store
+
 # Package Files #
 *.jar
 *.war
