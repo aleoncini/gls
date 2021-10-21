@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="An Open Source platform to share a livescore">
+  <meta name="author" content="Andrea Leoncini">
+
+  <title>Golf Live Score</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- Application CSS -->
+  <link href="css/gls.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container head_base">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="htitle" style="text-align: left;">Live Leaderboard</h2>
+        <hr class="ls_ttl">
+        <div class="row">
+          <div class="col-2"><p class="ls_headings">Tournament:</p></div>
+          <div class="col-10"><p id="p_ls_title" class="ls_headings_title"></p></div>
+        </div>
+        <div class="row">
+          <div class="col-2"><p class="ls_headings">Location:</p></div>
+          <div class="col-10"><p id="p_ls_location" class="ls_headings_values"></p></div>
+        </div>
+        <div class="row">
+          <div class="col-2"><p class="ls_headings">Dates:</p></div>
+          <div class="col-10"><p id="p_ls_date" class="ls_headings_values"></p></div>
+        </div>
+        <div class="row">
+          <div class="col-2"><p class="ls_headings">Formula:</p></div>
+          <div class="col-10"><p id="p_ls_formula" class="ls_headings_values"></p></div>
+        </div>        
+        <hr class="ls_ttl">
+
+
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#day1" role="tab" aria-controls="home" aria-selected="true">Day 1</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#day2" role="tab" aria-controls="profile" aria-selected="false">Day 2</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="day1" role="tabpanel" aria-labelledby="home-tab">
+            <table id="tbl_rounds_1" class="table table-condensed p-2">
+              <thead>
+                <tr>
+                  <th style="text-align: left;" width="13%">&nbsp;</th><th width="5%">&nbsp;</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th width="5%">&nbsp;</th><th width="5%">&nbsp;</th>
+                </tr>
+                <tr>
+                  <th style="text-align: left;" width="13%">&nbsp;</th><th width="5%">par</th><th class="t_ls_hd">4</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">4</th><th class="t_ls_hd">5</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">5</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">5</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">5</th><th width="5%">&nbsp;</th><th width="5%">&nbsp;</th>
+                </tr>
+                <tr>
+                  <th style="text-align: left;" width="13%">Player</th><th width="5%">hcp</th><th class="t_ls_hd">8</th><th class="t_ls_hd">9</th><th class="t_ls_hd">11</th><th class="t_ls_hd">15</th><th class="t_ls_hd">4</th><th class="t_ls_hd">6</th><th class="t_ls_hd">13</th><th class="t_ls_hd">4</th><th class="t_ls_hd">1</th><th class="t_ls_hd">2</th><th class="t_ls_hd">18</th><th class="t_ls_hd">16</th><th class="t_ls_hd">17</th><th class="t_ls_hd">5</th><th class="t_ls_hd">12</th><th class="t_ls_hd">10</th><th class="t_ls_hd">3</th><th class="t_ls_hd">7</th><th width="5%">tot</th><th width="5%">mdl</th>
+                </tr>
+              </thead>
+              <tbody id="t_ls_body_1">
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="day2" role="tabpanel" aria-labelledby="profile-tab">
+            <table id="tbl_rounds_2" class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="text-align: left;" width="13%">&nbsp;</th><th width="5%">&nbsp;</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th width="5%">&nbsp;</th><th width="5%">&nbsp;</th><th width="5%">&nbsp;</th>
+                </tr>
+                <tr>
+                  <th style="text-align: left;" width="13%">&nbsp;</th><th width="5%">par</th><th class="t_ls_hd">4</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">4</th><th class="t_ls_hd">5</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">5</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">5</th><th class="t_ls_hd">3</th><th class="t_ls_hd">4</th><th class="t_ls_hd">5</th><th width="5%">&nbsp;</th><th width="5%">&nbsp;</th><th width="5%">&nbsp;</th>
+                </tr>
+                <tr>
+                  <th style="text-align: left;" width="13%">Player</th><th width="5%">hcp</th><th class="t_ls_hd">8</th><th class="t_ls_hd">9</th><th class="t_ls_hd">11</th><th class="t_ls_hd">15</th><th class="t_ls_hd">4</th><th class="t_ls_hd">6</th><th class="t_ls_hd">13</th><th class="t_ls_hd">4</th><th class="t_ls_hd">1</th><th class="t_ls_hd">2</th><th class="t_ls_hd">18</th><th class="t_ls_hd">16</th><th class="t_ls_hd">17</th><th class="t_ls_hd">5</th><th class="t_ls_hd">12</th><th class="t_ls_hd">10</th><th class="t_ls_hd">3</th><th class="t_ls_hd">7</th><th width="5%">day</th><th width="5%">tot</th><th width="5%">mdl</th>
+                </tr>
+              </thead>
+              <tbody id="t_ls_body_2">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- New Trip Modal -->
+  <div class="modal fade" id="enterScoreModal" tabindex="-1" aria-labelledby="tripModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Enter score</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="roundId" name="roundId" value="">
+              <input type="hidden" id="the_hole" name="the_hole" value="">
+              <table style="width: 100%;">
+                <tr>
+                  <td style="width: 40%;" class="t_ls_hd_bld">PAR</td>
+                  <td style="width: 60%;" class="t_ls_hd_bld">HOLE</td>
+                </tr>
+                <tr>
+                  <td id="holePar" class="h_val"></td>
+                  <td id="holeNumb" class="h_numb" rowspan="5"></td>
+                </tr>
+                <tr>
+                  <td style="width: 40%;" class="t_ls_hd_bld">HCP</td>
+                </tr>
+                <tr>
+                  <td id="holeHcp" class="h_val"></td>
+                </tr>
+                <tr>
+                  <td style="width: 40%;" class="t_ls_hd_bld">additional strokes</td>
+                </tr>
+                <tr>
+                  <td id="holeAdd" class="h_val"></td>
+                </tr>
+              </table>
+
+              <div class="row">
+                <label for="inputStrokes" class="col-sm-3 col-form-label col-form-label-lg">Strokes:</label>
+                <div class="col-sm-9">
+                  <select id="inputStrokes" class="form-control form-control-lg" placeholder="enter strokes" data-style="btn-info">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveScoreButton">Save</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- END -- New Trip Modal -->
+  
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/bootstrap-table.js"></script>
+  <script src="js/gls.js"></script>
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+
+      loadTournament(localStorage.getItem("tournament_id"), displayTournament);
+
+      $('#saveScoreButton').click(function(){
+            $('#enterScoreModal').modal('hide');
+            //console.log('======> ' + $('#roundId').val() + ' - ' + $('#the_hole').val() + ' - ' + $('#inputStrokes').val());
+            var score = {};
+            score.id = $('#roundId').val();
+            score.hole = $('#the_hole').val();
+            score.strokes = $('#inputStrokes').val();
+            saveScore(score, displayHole);
+      });
+
+      $(document).on("click", ".active_hole", function () {
+        $('#roundId').val(this.dataset.id);
+        $('#the_hole').val(this.dataset.hole);
+        $('#holeNumb').html(this.dataset.hole);
+        $('#holePar').html(this.dataset.par);
+        $('#holeHcp').html(this.dataset.hcp);
+        if(this.dataset.add == 2){
+          $('#holeAdd').html('* *');
+        }
+        if(this.dataset.add == 1){
+          $('#holeAdd').html('*');
+        }
+        if(this.dataset.strokes !== undefined){
+          $('#inputStrokes').value = this.dataset.strokes;
+        }else{
+          var seltd = parseInt(this.dataset.par) + parseInt(this.dataset.add);
+          $('#inputStrokes').val(seltd);
+        }
+        $('#enterScoreModal').modal('show');
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>

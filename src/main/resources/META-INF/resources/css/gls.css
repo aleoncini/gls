@@ -1,0 +1,187 @@
+.htitle {
+        color: #761c19;
+        font-weight: bold;
+}
+
+.t_list_table {
+    color: #102e3b;
+    text-align: left;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.t_list_table_rgt {
+    color: #102e3b;
+    text-align: right;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.ls_headings {
+    color: #A30000;
+    font-size: 1.1em;
+    font-weight: normal;
+    text-align: left;
+}
+.ls_headings_values {
+    color: #102e3b;
+    font-size: 1.0em;
+    font-weight: normal;
+    text-align: left;
+}
+.ls_headings_title {
+    color: #102e3b;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: left;
+}
+hr.ls_ttl {
+    border-top: 1px solid #761c19;
+}
+.t_ls_hd {
+    color: #102e3b;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+.t_ls_pla {
+    color: #761c19;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: left;
+}
+.t_ls_hd_bld {
+    color: #102e3b;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: center;
+}
+.t_ls_und {
+    color: #00a5d3;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.t_ls_ovr {
+    color: #A30000;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+.t_ls_empty {
+    color: #102e3b;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+.h_numb {
+    color: #102e3b;
+    font-size: 12em;
+    font-weight: bold;
+    text-align: center; 
+    vertical-align: middle;
+}
+.h_val {
+    color: #502e3b;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+
+
+
+.head_base {
+    padding-top: 70px;
+}
+
+.text_base {
+    color: #2b2b2b;
+    text-align: center;
+    font-size: 1.4em;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.page_title {
+    color: #b45f05;
+    text-align: left;
+    font-size: 2.2em;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.block_title {
+    font-size: 1.2em;
+    color: #102e3b;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.block_body {
+    font-size: 1.4em;
+    color: #102e3b;
+    text-align: left;
+}
+
+.t_table thead {
+    background-color: #b45f05;
+    color: whitesmoke;
+    text-align: left;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.t_table tbody {
+    color: #102e3b;
+    text-align: left;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.t_table th {
+    padding-left: 50px;
+}
+
+.t_table td.nm {
+    padding-left: 20px;
+}
+
+.t_table td.subj {
+    font-style: italic;
+}
+
+.ttt {
+    border: 1px solid #b45f05;
+    border-radius: 15px;
+    background-color: rgb(219, 190, 163);
+    padding: 5px;
+    color: #102e3b;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.table_title {
+    text-align: left;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #b45f05;
+}
+
+.page_bnr {
+    float:right;
+}
+
+.usr {
+    text-align: right;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #26214b;
+    vertical-align: bottom;
+}
+
+.rol {
+    text-align: right;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    color: #495255;
+    vertical-align: middle;
+}
