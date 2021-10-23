@@ -3,7 +3,7 @@ package org.ztour.gls.model;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 
-@MongoEntity(collection="tournaments")
+@MongoEntity(collection="leaderboards")
 public class Tournament extends PanacheMongoEntity {
     
     public String title;

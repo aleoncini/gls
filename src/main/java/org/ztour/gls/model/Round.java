@@ -7,7 +7,7 @@ import java.util.Map;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 
-@MongoEntity(collection="rounds")
+@MongoEntity(collection="scores")
 public class Round extends PanacheMongoEntity {
     public String tournamentId;
     public String playerName;
