@@ -17,10 +17,13 @@ function displayHole(info) {
     // bisogna ricalcolare tutti i totali e rifare il sort della tabella
     if(info.day == 1){
         setTotalsFirstDay(info.roundId, info.phcp, info.playerId);
+        updateTotalsSecondDay(info.playerId);
     }
     if(info.day == 2){
         setTotalsSecondDay(info.roundId, info.phcp, info.playerId);
     }
+    sortTable(1);
+    sortTable(2);
 };
 
 function displayTournaments(tournaments) {
@@ -63,7 +66,11 @@ function addRoundToTable(round) {
     }
 
     var rowContent = '<tr>';
-    rowContent += '<td class="t_ls_pla">' + round.playerName + '</td>';
+    if(round.day == 1){
+        rowContent += '<td class="t_ls_pla">' + round.playerName + '</td>';
+    } else {
+        rowContent += '<td class="t_ls_pla"><span  style="display: none" id="r2_mdl_' + round.playerId + '"></span>' + round.playerName + '</td>';
+    }
     rowContent += '<td class="t_ls_hd_bld">' + round.phcp + '</td>';
 
     for(let i=1; i<= 18; i++){
@@ -146,6 +153,7 @@ function setTotalsFirstDay(rid, phcp, pid) {
         $(td_id).html(tot);
         if(mdl == 0) {
             $(td_id_mdl).html('PAR');
+            $(td_id_mdl).css("color", '#102e3b');
         }
         if(mdl > 0) {
             $(td_id_mdl).html('+' + mdl);
@@ -169,11 +177,72 @@ function setTotalsSecondDay(rid, phcp, pid) {
     var r1_r2_tot = r1_tot + r2_tot;
 
     var mdl = calculateRoundMedal(rid, phcp);
+    var sp_id_for_mdl = '#r2_mdl_' + pid;
+    $(sp_id_for_mdl).html(mdl);
+    var mdltot = mdl;
+    var td_id_mdl_1 = '#mdl_1_' + pid;
+    var r1_mdl_html = $(td_id_mdl_1).html();
+    if(! isNaN(r1_mdl_html)){
+        var r1_mdl = parseInt(r1_mdl_html);
+        mdltot += r1_mdl;
+    }
+
+    var td_id_tot_2 = '#tot_2_' + pid;
+    var td_id_mdl_2 = '#mdl_2_' + pid;
+    var td_id_tot = '#tot_all_' + pid;
+    if(r2_tot == 0){
+        $(td_id_tot_2).html('&nbsp');
+    }else{
+        $(td_id_tot_2).html(r2_tot);
+    }
+    if(r1_r2_tot == 0){
+        $(td_id_tot).html('&nbsp');
+    }else{
+        $(td_id_tot).html(r1_r2_tot);
+    }
+    if(mdltot == 0){
+        $(td_id_mdl_2).html('PAR');
+        $(td_id_mdl_2).css("color", '#102e3b');
+    }
+    if(mdltot > 0){
+        $(td_id_mdl_2).html('+' + mdltot);
+        $(td_id_mdl_2).css("color", '#A30000');
+    }
+    if(mdltot < 0){
+        $(td_id_mdl_2).html(mdltot);
+        $(td_id_mdl_2).css("color", '#00a5d3');
+    }
+};
+
+function updateTotalsSecondDay(pid) {
+    var r1_tot = 0;
+    var td_id_tot_1 = '#tot_1_' + pid;
+    var r1_tot_html = $(td_id_tot_1).html();
+    if(! isNaN(r1_tot_html)){
+        r1_tot = parseInt(r1_tot_html);
+    }
+
+    var r2_tot = 0;
+    var td_id_tot_2 = '#tot_2_' + pid;
+    var r2_tot_html = $(td_id_tot_2).html();
+    if(! isNaN(r2_tot_html)){
+        r2_tot = parseInt(r2_tot_html);
+    }
+
+    var r1_r2_tot = r1_tot + r2_tot;
+
+    var mdl = 0;
     var td_id_mdl_1 = '#mdl_1_' + pid;
     var r1_mdl_html = $(td_id_mdl_1).html();
     if(! isNaN(r1_mdl_html)){
         var r1_mdl = parseInt(r1_mdl_html);
         mdl += r1_mdl;
+    }
+    var td_id_mdl_2 = '#r2_mdl_' + pid;
+    var r2_mdl_html = $(td_id_mdl_2).html();
+    if(! isNaN(r2_mdl_html)){
+        var r2_mdl = parseInt(r2_mdl_html);
+        mdl += r2_mdl;
     }
 
     var td_id_tot_2 = '#tot_2_' + pid;
@@ -191,6 +260,7 @@ function setTotalsSecondDay(rid, phcp, pid) {
     }
     if(mdl == 0){
         $(td_id_mdl_2).html('PAR');
+        $(td_id_mdl_2).css("color", '#102e3b');
     }
     if(mdl > 0){
         $(td_id_mdl_2).html('+' + mdl);
