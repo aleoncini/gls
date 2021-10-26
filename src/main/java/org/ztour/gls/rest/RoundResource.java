@@ -50,6 +50,8 @@ public class RoundResource {
         round.update();
         HoleInfo info = new HoleInfo();
         info.roundId = roundId;
+        info.playerId = round.playerId;
+        info.day = round.day;
         info.hole = hole;
         info.strokes = strokes;
         info.phcp = round.phcp;

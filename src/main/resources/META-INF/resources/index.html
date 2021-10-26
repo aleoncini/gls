@@ -45,14 +45,11 @@
         </p>
 
         <div class="container">
-          <table class="table table-condensed table-hover">
+          <table id="tbl_leaderboards" class="table table-condensed table-hover">
             <thead>
               <tr><th style="text-align: left;">Tournaments</th><th style="text-align: left;">Course</th><th style="text-align: right;">Dates</th></tr>
             </thead>
-            <tbody>
-              <tr class="view_livescore" data-id="616d8ea747979b195da93da2">
-                <td class="t_list_table">Zingarotour Masters 2021</td><td class="t_list_table">Golf Club Toscana - Il Pelagone, Gavorrano, Italy</td><td class="t_list_table_rgt">13, 14 November 2021</td>
-              </tr>
+            <tbody id="tbody_leaderboards">
             </tbody>
           </table>
         </div>
@@ -69,12 +66,11 @@
   <script type="text/javascript">
 
     $(document).ready(function(){
-      
-        $(document).on("click", ".view_livescore", function () {
-          localStorage.setItem("tournament_id", this.dataset.id);
-          window.location = ('/livescore.html'); 
-        });
-
+      loadTournaments(displayTournaments);
+      $(document).on("click", ".view_livescore", function () {
+        localStorage.setItem("tournament_id", this.dataset.id);
+        window.location = ('/livescore.html'); 
+      });
     });
 
   </script>

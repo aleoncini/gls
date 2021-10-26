@@ -15,6 +15,28 @@ function displayHole(info) {
 
     // !!!!!!!!!!!!!!!!!
     // bisogna ricalcolare tutti i totali e rifare il sort della tabella
+    if(info.day == 1){
+        setTotalsFirstDay(info.roundId, info.phcp, info.playerId);
+    }
+    if(info.day == 2){
+        setTotalsSecondDay(info.roundId, info.phcp, info.playerId);
+    }
+};
+
+function displayTournaments(tournaments) {
+    $("#tbody_leaderboards").empty();
+    $.each(tournaments, function (index, tournament) {
+        addTournamentToTable(tournament);
+    });
+};
+
+function addTournamentToTable(tournament) {
+    var rowContent = '<tr class="view_livescore" data-id="' + tournament.id + '">';
+    rowContent += '<td class="t_list_table">' + tournament.title + '</td>';
+    rowContent += '<td class="t_list_table">' + tournament.location + '</td>';
+    rowContent += '<td class="t_list_table_rgt">' + tournament.date + '</td>';
+    rowContent += '</tr>';
+    $('#tbl_leaderboards tbody').append(rowContent);
 };
 
 function displayTournament(tournament) {
@@ -49,9 +71,7 @@ function addRoundToTable(round) {
         if(round.holes !== null){
             if(round['holes'][i] !== undefined){
                 var strk = round.holes[i];
-                //tots[round.playerId][theDay] += strk;
                 var net_result = calculateMedal(i, strk, round.phcp);
-                //mdl[round.playerId][theDay] += net_result;
                 var b_g_color = 'd7edef';
                 if(net_result > 0){
                     b_g_color = 'dfdfdf';
@@ -74,125 +94,27 @@ function addRoundToTable(round) {
         }
     }
 
-    //console.log('===> total: ' + calculateFirstRoundTotalStrokes(round.id));
-
-    // colpi totali da aggiornare
     if(round.day == 1){
         rowContent += '<td id="tot_1_' + round.playerId + '" class="t_ls_hd_bld">#</td>';
         rowContent += '<td id="mdl_1_' + round.playerId + '" class="t_ls_hd_bld">#</td>';
     }
-        //if(tots[round.playerId][theDay] > 0){
-        //rowContent += '<td id="tot_1_' + round.playerId + '" class="t_ls_hd_bld">' + tots[round.playerId][theDay] + '</td>';
-    //}else{
-        //rowContent += '<td>&nbsp</td>';
-    //}
 
     if(round.day == 2){
         rowContent += '<td id="tot_2_' + round.playerId + '" class="t_ls_hd_bld">#</td>';
         rowContent += '<td id="tot_all_' + round.playerId + '" class="t_ls_hd_bld">#</td>';
         rowContent += '<td id="mdl_2_' + round.playerId + '" class="t_ls_hd_bld">#</td>';
-//        var totale = tots[round.playerId]['fr'] + tots[round.playerId]['sr'];
-//        var allmdl = mdl[round.playerId]['fr'] + mdl[round.playerId]['sr'];
-//        if(totale > 0){
-//            rowContent += '<td id="tot_' + round.playerId + '" class="t_ls_hd_bld">' + totale + '</td>';
-//        }else{
-//            rowContent += '<td>&nbsp</td>';
-//        }
-//        if(allmdl == 0){
-//            rowContent += '<td class="t_ls_hd_bld">PAR</td>';
-//        } else if(allmdl > 0) {
-//            rowContent += '<td class="t_ls_ovr">+' + allmdl + '</td>';
-//        } else {
-//            rowContent += '<td class="t_ls_und">' + allmdl + '</td>';
-//        }
     }
-
-//    if(round.day == 1){
-//
-//        if(mdl[round.playerId]['fr'] == 0){
-//            rowContent += '<td class="t_ls_hd_bld">PAR</td>';
-//        }
-//        if(mdl[round.playerId]['fr'] > 0) {
-//            console.log('===> medal: ' + mdl[round.playerId]['fr']);
-//            rowContent += '<td class="t_ls_ovr">+' + mdl[round.playerId]['fr'] + '</td>';
-//        }
-//        if(mdl[round.playerId]['fr'] < 0) {
-//            rowContent += '<td class="t_ls_und">' + mdl[round.playerId]['fr'] + '</td>';
-//        }
-//    }
 
     rowContent += '</tr>';
     var the_table = '#tbl_rounds_' + round.day + ' tbody';
     $(the_table).append(rowContent);
 
-    // now that the round is part of the table we can sort the table
-    // and execute calculations
+    // now that the round is part of the table we can execute calculations
     if(round.day == 1){
-        var tot = calculateRoundTotalStrokes(round.id);
-        var mdl = calculateRoundMedal(round.id, round.phcp);
-        var td_id = '#tot_1_' + round.playerId;
-        var td_id_mdl = '#mdl_1_' + round.playerId;
-        if(tot == 0){
-            $(td_id).html('&nbsp');
-            $(td_id_mdl).html('&nbsp');
-        }
-        if(tot > 0){
-            $(td_id).html(tot);
-            if(mdl == 0) {
-                $(td_id_mdl).html('PAR');
-            }
-            if(mdl > 0) {
-                $(td_id_mdl).html('+' + mdl);
-                $(td_id_mdl).css("color", '#A30000');
-            }
-            if(mdl < 0) {
-                $(td_id_mdl).html(mdl);
-                $(td_id_mdl).css("color", '#00a5d3');
-            }
-        }
+        setTotalsFirstDay(round.id, round.phcp, round.playerId);
     }
     if(round.day == 2){
-        var r1_tot = 0;
-        var td_id_tot_1 = '#tot_1_' + round.playerId;
-        var r1_tot_html = $(td_id_tot_1).html();
-        if(! isNaN(r1_tot_html)){
-            r1_tot = parseInt(r1_tot_html);
-        }
-        var r2_tot = calculateRoundTotalStrokes(round.id);
-        var r1_r2_tot = r1_tot + r2_tot;
-
-        var mdl = calculateRoundMedal(round.id, round.phcp);
-        var td_id_mdl_1 = '#mdl_1_' + round.playerId;
-        var r1_mdl_html = $(td_id_mdl_1).html();
-        if(! isNaN(r1_mdl_html)){
-            var r1_mdl = parseInt(r1_mdl_html);
-            mdl += r1_mdl;
-        }
-
-        var td_id_tot_2 = '#tot_2_' + round.playerId;
-        var td_id_mdl_2 = '#mdl_2_' + round.playerId;
-        var td_id_tot = '#tot_all_' + round.playerId;
-        if(r2_tot == 0){
-            $(td_id_tot_2).html('&nbsp');
-        }else{
-            $(td_id_tot_2).html(r2_tot);
-        }
-        if(r1_r2_tot == 0){
-            $(td_id_tot).html('&nbsp');
-        }else{
-            $(td_id_tot).html(r1_r2_tot);
-        }
-        if(mdl == 0){
-            $(td_id_mdl_2).html('PAR');
-        }
-        if(mdl > 0){
-            $(td_id_mdl_2).html(mdl);
-            $(td_id_mdl_2).css("color", '#A30000');
-        }
-        if(mdl < 0){
-            $(td_id_mdl_2).html(mdl);
-            $(td_id_mdl_2).css("color", '#00a5d3');
-        }
+        setTotalsSecondDay(round.id, round.phcp, round.playerId);
     }
 };
 
@@ -209,6 +131,75 @@ function tableDataContent(roundId, phcp, hole, strokes) {
     var holeHcp = getHoleHcp(hole);
     var content = '<td id="' + td_id + '" style="cursor: pointer; background-color: #' + b_g_color + ';" class="t_ls_hd active_hole" data-id="' + roundId + '" data-hole="' + hole + '" data-par="' + getHolePar(hole) + '" data-hcp="' + holeHcp + '" data-add="' + calculateAdditionalStrokes(phcp, holeHcp) + '">' + strokes + '</td>';
     return content;
+};
+
+function setTotalsFirstDay(rid, phcp, pid) {
+    var tot = calculateRoundTotalStrokes(rid);
+    var mdl = calculateRoundMedal(rid, phcp);
+    var td_id = '#tot_1_' + pid;
+    var td_id_mdl = '#mdl_1_' + pid;
+    if(tot == 0){
+        $(td_id).html('&nbsp');
+        $(td_id_mdl).html('&nbsp');
+    }
+    if(tot > 0){
+        $(td_id).html(tot);
+        if(mdl == 0) {
+            $(td_id_mdl).html('PAR');
+        }
+        if(mdl > 0) {
+            $(td_id_mdl).html('+' + mdl);
+            $(td_id_mdl).css("color", '#A30000');
+        }
+        if(mdl < 0) {
+            $(td_id_mdl).html(mdl);
+            $(td_id_mdl).css("color", '#00a5d3');
+        }
+    }
+};
+
+function setTotalsSecondDay(rid, phcp, pid) {
+    var r1_tot = 0;
+    var td_id_tot_1 = '#tot_1_' + pid;
+    var r1_tot_html = $(td_id_tot_1).html();
+    if(! isNaN(r1_tot_html)){
+        r1_tot = parseInt(r1_tot_html);
+    }
+    var r2_tot = calculateRoundTotalStrokes(rid);
+    var r1_r2_tot = r1_tot + r2_tot;
+
+    var mdl = calculateRoundMedal(rid, phcp);
+    var td_id_mdl_1 = '#mdl_1_' + pid;
+    var r1_mdl_html = $(td_id_mdl_1).html();
+    if(! isNaN(r1_mdl_html)){
+        var r1_mdl = parseInt(r1_mdl_html);
+        mdl += r1_mdl;
+    }
+
+    var td_id_tot_2 = '#tot_2_' + pid;
+    var td_id_mdl_2 = '#mdl_2_' + pid;
+    var td_id_tot = '#tot_all_' + pid;
+    if(r2_tot == 0){
+        $(td_id_tot_2).html('&nbsp');
+    }else{
+        $(td_id_tot_2).html(r2_tot);
+    }
+    if(r1_r2_tot == 0){
+        $(td_id_tot).html('&nbsp');
+    }else{
+        $(td_id_tot).html(r1_r2_tot);
+    }
+    if(mdl == 0){
+        $(td_id_mdl_2).html('PAR');
+    }
+    if(mdl > 0){
+        $(td_id_mdl_2).html('+' + mdl);
+        $(td_id_mdl_2).css("color", '#A30000');
+    }
+    if(mdl < 0){
+        $(td_id_mdl_2).html(mdl);
+        $(td_id_mdl_2).css("color", '#00a5d3');
+    }
 };
 
 function calculateRoundTotalStrokes(roundId) {
@@ -346,6 +337,18 @@ function saveScore(score, callbackFunction) {
         complete: function(response, status, xhr){
             var holeInfo = jQuery.parseJSON(response.responseText);
             callbackFunction(holeInfo);
+        }
+    });
+};
+
+function loadTournaments(callbackFunction) {
+    var theUrl = STORE_ORIGIN + '/tournaments';
+    $.ajax({
+        url: theUrl,
+        type: 'GET',
+        dataType: 'json',
+        complete: function(response, status, xhr){
+            callbackFunction(jQuery.parseJSON(response.responseText));
         }
     });
 };
